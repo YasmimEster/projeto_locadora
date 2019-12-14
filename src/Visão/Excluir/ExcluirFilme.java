@@ -5,17 +5,31 @@
  */
 package Visão.Excluir;
 
-/**
- *
- * @author User
- */
-public class ExcluirFilme extends javax.swing.JFrame {
+import java.sql.*;
+import DAO.*;
+import Modelo.*;
+import java.util.*;
+import javax.swing.*;
 
-    /**
-     * Creates new form ExcluirFilme
-     */
+public class ExcluirFilme extends javax.swing.JFrame {
+private void AtualizaCombo(){
+        Connection con = Conexao.AbrirConexao();
+        FilmeDAO sql = new FilmeDAO(con);
+        List<Filme> lista = new ArrayList<>();
+        lista = sql.ListarComboFilme();
+        jCB_Titulo.addItem("");
+        
+        for (Filme b: lista){
+            jCB_Titulo.addItem(b.getTitulo());
+        }
+        Conexao.FecharConexao(con);
+    }
+    
     public ExcluirFilme() {
         initComponents();
+        setTitle("Video Locadora");
+        AtualizaCombo();
+        setLocationRelativeTo(this);
     }
 
     /**
@@ -27,10 +41,10 @@ public class ExcluirFilme extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTextField1 = new javax.swing.JTextField();
+        jTF_codigo = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
+        jCB_Titulo = new javax.swing.JComboBox<>();
+        btExcluir = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         panel1 = new java.awt.Panel();
         label1 = new java.awt.Label();
@@ -39,7 +53,18 @@ public class ExcluirFilme extends javax.swing.JFrame {
 
         jLabel1.setText("Titulo:");
 
-        jButton1.setText("OK");
+        jCB_Titulo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCB_TituloActionPerformed(evt);
+            }
+        });
+
+        btExcluir.setText("OK");
+        btExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btExcluirActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Cancelar");
 
@@ -74,15 +99,15 @@ public class ExcluirFilme extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(28, 28, 28)
-                        .addComponent(jButton1)
+                        .addComponent(btExcluir)
                         .addGap(51, 51, 51)
                         .addComponent(jButton2)
                         .addContainerGap(123, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTF_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jCB_Titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(24, 24, 24))))
         );
         layout.setVerticalGroup(
@@ -92,17 +117,57 @@ public class ExcluirFilme extends javax.swing.JFrame {
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jCB_Titulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTF_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(btExcluir)
                     .addComponent(jButton2))
                 .addGap(0, 128, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExcluirActionPerformed
+       String codigo = jTF_codigo.getText();
+        String titulo = jCB_Titulo.getSelectedItem().toString();
+        
+        Connection con = Conexao.AbrirConexao();
+        FilmeDAO sql = new FilmeDAO(con);
+        Filme a = new Filme();
+        if (titulo.equals("")){
+            JOptionPane.showMessageDialog(null, "Nenhum Nome Selecionado",
+                    "Video Locadora", JOptionPane.WARNING_MESSAGE);
+        } else{
+        int b = JOptionPane.showConfirmDialog(null, "Deseja Realmente Excluir"
+            + " \n (" + codigo + ") (" + titulo + ") ", "Video Locadora",
+            JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (b == 0){
+        int cod = Integer.parseInt(codigo);
+        a.setTitulo(titulo);
+        a.setCodigo(cod);
+        sql.Excluir_Filme(a);
+        Conexao.FecharConexao(con);
+            dispose();
+        }
+        }
+    }//GEN-LAST:event_btExcluirActionPerformed
+
+    private void jCB_TituloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCB_TituloActionPerformed
+         Connection con = Conexao.AbrirConexao();
+        FilmeDAO sql = new FilmeDAO(con);
+        List<Filme> lista = new ArrayList<>();
+        String nome = jCB_Titulo.getSelectedItem().toString();
+        
+        lista = sql.ConsultaCodigoFilme(nome);
+        
+        for (Filme b: lista){
+            int a = b.getCodigo();
+            jTF_codigo.setText("" + a);
+        }
+        Conexao.FecharConexao(con);
+    }//GEN-LAST:event_jCB_TituloActionPerformed
 
     /**
      * @param args the command line arguments
@@ -140,11 +205,11 @@ public class ExcluirFilme extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btExcluir;
     private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jCB_Titulo;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTF_codigo;
     private java.awt.Label label1;
     private java.awt.Panel panel1;
     // End of variables declaration//GEN-END:variables

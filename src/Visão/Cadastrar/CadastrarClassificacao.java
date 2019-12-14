@@ -5,6 +5,12 @@
  */
 package Visão.Cadastrar;
 
+import DAO.ClassificacaoDAO;
+import DAO.Conexao;
+import Modelo.Classificacao;
+import java.sql.*;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author User
@@ -16,6 +22,7 @@ public class CadastrarClassificacao extends javax.swing.JFrame {
      */
     public CadastrarClassificacao() {
         initComponents();
+        setLocationRelativeTo(this);
     }
 
     /**
@@ -149,7 +156,24 @@ public class CadastrarClassificacao extends javax.swing.JFrame {
         String nome = jTF_Nome.getText();
         String preco = jTF_Preco.getText();
         if (nome.equals("") || preco.equals("")) {
+        JOptionPane.showMessageDialog(null, "nenhum Campo pode estar vazio",
+                "Video Locadora", JOptionPane.WARNING_MESSAGE);
+        } else {
+        Connection con = Conexao.AbrirConexao();
+        ClassificacaoDAO sql = new ClassificacaoDAO(con);
+        Classificacao a = new Classificacao();
         
+        a.setNome(nome);
+        a.setPreco(Double.parseDouble(preco));
+        
+        sql.Inserir_Classificacao(a);
+        Conexao.FecharConexao(con);
+        
+        jTF_Nome.setText("");
+        jTF_Preco.setText("");
+        JOptionPane.showMessageDialog(null, "Cadastro Realizado com Sucesso",
+                "Video Locadora", JOptionPane.INFORMATION_MESSAGE);
+        dispose();
         }
     }//GEN-LAST:event_btSalvarActionPerformed
 

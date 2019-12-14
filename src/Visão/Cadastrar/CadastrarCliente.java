@@ -21,6 +21,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
      */
     public CadastrarCliente() {
         initComponents();
+        setLocationRelativeTo(this);
     }
 
     /**
@@ -143,7 +144,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
         }
 
         try {
-            jTF_Nascimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/##")));
+            jTF_Nascimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }

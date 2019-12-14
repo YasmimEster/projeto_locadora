@@ -37,6 +37,9 @@ public class Classificacao {
     public void setPreco(double preco) {
         this.preco = preco;
     }
-    
+
+    public void setPreco(String preco) {
+        
+    }
     
 }
