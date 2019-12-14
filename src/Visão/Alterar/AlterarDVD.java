@@ -31,14 +31,32 @@ public class AlterarDVD extends javax.swing.JFrame {
                 jTF_Codigo.setText("" + a.getCodigo());
                 jTF_Data.setText(a.getData_compra());
                 jTF_Preco.setText(""+a.getPreco());
-                jTF_cod.setText("" + a.getCod_filme());
+                jTF_Filme.setText("" + a.getCod_filme());
+                jTF_Situacao.setText(a.getSituacao());
+                
                
             } 
             Conexao.FecharConexao(con);
         }
+ private void AtualizaComboFilme(){
+        Connection con = Conexao.AbrirConexao();
+        FilmeDAO sql = new FilmeDAO(con);
+        List<Filme> lista = new ArrayList<>();
+        lista = sql.ListarFilme();
+     
+        jCB_Filme.addItem("");
+        jTF_Filme.setText("");
+         
+        for (Filme b: lista){
+            jCB_Filme.addItem(b.getTitulo());
+            
+       }
+        Conexao.FecharConexao(con);
+    }
     public AlterarDVD() {
         initComponents();
         setLocationRelativeTo(this);
+        AtualizaComboFilme();
     }
 
     /**
@@ -73,9 +91,14 @@ public class AlterarDVD extends javax.swing.JFrame {
         btOK = new javax.swing.JButton();
         jTF_Filme = new javax.swing.JFormattedTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jButton3.setText("Cancelar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Filme");
 
@@ -114,6 +137,11 @@ public class AlterarDVD extends javax.swing.JFrame {
         jLabel1.setText("Codigo");
 
         jButton1.setText("Limpar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Situação");
 
@@ -123,8 +151,6 @@ public class AlterarDVD extends javax.swing.JFrame {
                 btAlterarActionPerformed(evt);
             }
         });
-
-        jTF_Situacao.setText("Disponivel");
 
         jLabel6.setText("Digite o Codigo");
 
@@ -237,24 +263,24 @@ public class AlterarDVD extends javax.swing.JFrame {
 
     private void btAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAlterarActionPerformed
         String codigo = jTF_Codigo.getText();
-        String Filme = jTF_Filme.getText();
+        String filme = jTF_Filme.getText();
         String preco = jTF_Preco.getText();
         String data = jTF_Data.getText();
         String situacao = jTF_Situacao.getText();
         
-       if (codigo.equals("")) {
+       if (filme.equals("")) {
             JOptionPane.showMessageDialog(null, "nenhum campo pode estar vazio", 
                 "Video Locadora", JOptionPane.WARNING_MESSAGE);
         } else {
         Connection con = Conexao.AbrirConexao();
         DVDDAO sql =  new DVDDAO(con);
         int cod = Integer.parseInt(codigo);
-        int filme = Integer.parseInt(Filme);
+        int Filme = Integer.parseInt(filme);
         double Preco = Double.parseDouble(preco);
         DVD a = new DVD();
         
         a.setCodigo(cod);
-        a.setCod_filme(filme);
+        a.setCod_filme(Filme);
         a.setPreco(Preco);
         a.setData_compra(data);
         a.setSituacao(situacao);
@@ -268,10 +294,11 @@ public class AlterarDVD extends javax.swing.JFrame {
         jTF_Preco.setText("");
         jTF_Data.setText("");
         jTF_Situacao.setText("");
+        jTF_Codigo.setText("");
        
         JOptionPane.showMessageDialog(null, "Alteração Realizada com Sucesso",
                 "Video Locadora", JOptionPane.INFORMATION_MESSAGE);
-            dispose();
+            
         
         
         }
@@ -320,6 +347,18 @@ public class AlterarDVD extends javax.swing.JFrame {
             jTF_Filme.setText("" + a);
         }
     }//GEN-LAST:event_jCB_FilmeActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        jTF_Filme.setText("");
+        jTF_Preco.setText("");
+        jTF_Data.setText("");
+        jTF_Situacao.setText("");
+        jTF_Codigo.setText("");
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        dispose();
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments

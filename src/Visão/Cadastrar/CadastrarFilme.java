@@ -102,7 +102,7 @@ public class CadastrarFilme extends javax.swing.JFrame {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         label3.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         label3.setText("Cadastro de Filme");
@@ -125,6 +125,11 @@ public class CadastrarFilme extends javax.swing.JFrame {
         );
 
         button7.setLabel("Limpar");
+        button7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button7ActionPerformed(evt);
+            }
+        });
 
         btSalvar.setLabel("Cadastrar");
         btSalvar.addActionListener(new java.awt.event.ActionListener() {
@@ -134,6 +139,11 @@ public class CadastrarFilme extends javax.swing.JFrame {
         });
 
         button9.setLabel("Cancelar");
+        button9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button9ActionPerformed(evt);
+            }
+        });
 
         lbCapa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/WhatsApp Image 2019-12-01 at 19.21.54.jpeg"))); // NOI18N
 
@@ -373,6 +383,19 @@ public class CadastrarFilme extends javax.swing.JFrame {
      }
         
     }//GEN-LAST:event_btCapaActionPerformed
+
+    private void button7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button7ActionPerformed
+        jTF_Titulo.setText("");
+                jTF_Ano.setText("");
+                jTF_Duracao.setText("");
+                jTF_Categoria.setText("");
+                jTF_Classificacao.setText("");
+                tfCapa.setText("");        
+    }//GEN-LAST:event_button7ActionPerformed
+
+    private void button9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button9ActionPerformed
+        dispose();
+    }//GEN-LAST:event_button9ActionPerformed
 
     /**
      * @param args the command line arguments

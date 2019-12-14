@@ -49,7 +49,13 @@ private void AtualizaCombo(){
         panel1 = new java.awt.Panel();
         label1 = new java.awt.Label();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        jTF_codigo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTF_codigoActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Titulo:");
 
@@ -67,6 +73,11 @@ private void AtualizaCombo(){
         });
 
         jButton2.setText("Cancelar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         label1.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         label1.setText("Excluir Filme");
@@ -168,6 +179,14 @@ private void AtualizaCombo(){
         }
         Conexao.FecharConexao(con);
     }//GEN-LAST:event_jCB_TituloActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jTF_codigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTF_codigoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTF_codigoActionPerformed
 
     /**
      * @param args the command line arguments

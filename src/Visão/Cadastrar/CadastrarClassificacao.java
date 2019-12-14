@@ -48,7 +48,7 @@ public class CadastrarClassificacao extends javax.swing.JFrame {
         jTF_Nome = new javax.swing.JTextField();
         jTF_Preco = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         label1.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         label1.setText("Cadastro de Classificação");
@@ -71,6 +71,11 @@ public class CadastrarClassificacao extends javax.swing.JFrame {
         );
 
         button1.setLabel("Limpar");
+        button1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button1ActionPerformed(evt);
+            }
+        });
 
         btSalvar.setLabel("Cadastrar");
         btSalvar.addActionListener(new java.awt.event.ActionListener() {
@@ -80,6 +85,11 @@ public class CadastrarClassificacao extends javax.swing.JFrame {
         });
 
         button3.setLabel("Cancelar");
+        button3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button3ActionPerformed(evt);
+            }
+        });
 
         jLabel9.setText("Codigo:");
 
@@ -176,6 +186,15 @@ public class CadastrarClassificacao extends javax.swing.JFrame {
         dispose();
         }
     }//GEN-LAST:event_btSalvarActionPerformed
+
+    private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
+        jTF_Nome.setText("");
+        jTF_Preco.setText("");
+    }//GEN-LAST:event_button1ActionPerformed
+
+    private void button3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button3ActionPerformed
+        dispose();
+    }//GEN-LAST:event_button3ActionPerformed
 
     /**
      * @param args the command line arguments

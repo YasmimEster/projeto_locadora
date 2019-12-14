@@ -112,18 +112,18 @@ public class DVDDAO extends ExecuteSQL{
    
 }
 
-    public String Alterar_DVD(DVD a) {
-            String sql = "update dvd set Data = ? , preco = ? ,situacao = ?"
-                    + ",idfilme =? where iddvd = ? ";
+    public String Alterar_DVD(DVD a){
+            String sql = "update dvd set idfilme = ? , preco_compra = ? ,data_compra = ?"
+                    + ",situacao =?"
+                    + " where iddvd = ? ";
         try {
             
             PreparedStatement ps =  getCon().prepareStatement(sql);
-            ps.setString(1, a.getData_compra());
-            ps.setInt(2, a.getCod_filme());
-            ps.setInt(3, a.getCodigo());
-            ps.setDouble(4, a.getPreco());
-            ps.setString(5, a.getSituacao());
-           
+            ps.setInt(1, a.getCod_filme());
+            ps.setDouble(2, a.getPreco());
+            ps.setString(3, a.getData_compra());
+            ps.setString(4, a.getSituacao()); 
+            ps.setInt(5, a.getCodigo());
             if (ps.executeUpdate() > 0){
                 return "Atualizado com Sucesso.";
             } else {
@@ -132,7 +132,7 @@ public class DVDDAO extends ExecuteSQL{
       } catch (SQLException e) {
           return e.getMessage();
       }
-    }
+        }
 
     public boolean Testar_DVD(int cod) {
          boolean Resultado = false;
