@@ -66,6 +66,11 @@ public class ConsultarCategoria extends javax.swing.JFrame {
         });
 
         jButton3.setText("Todos");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -166,6 +171,26 @@ public class ConsultarCategoria extends javax.swing.JFrame {
                  }
          Conexao.FecharConexao(con);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        Connection con = Conexao.AbrirConexao();
+         CategoriaDAO bd= new CategoriaDAO (con);
+         List<Categoria> lista = new ArrayList<>();
+         lista = bd.Pesquisar_Tudo_Categoria();
+         DefaultTableModel tbm = (DefaultTableModel) jTable.getModel ();
+         while (tbm.getRowCount()>0) {
+             tbm.removeRow(0);
+              }
+         int i = 0;
+         for( Categoria tab : lista) {
+             tbm.addRow(new String[i]);
+             jTable.setValueAt(tab.getCodigo(), i,0);
+              jTable.setValueAt(tab.getNome(), i,1); 
+              i++;
+                  
+                 }
+         Conexao.FecharConexao(con);
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments

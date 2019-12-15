@@ -298,7 +298,7 @@ public class AlterarDVD extends javax.swing.JFrame {
        
         JOptionPane.showMessageDialog(null, "Alteração Realizada com Sucesso",
                 "Video Locadora", JOptionPane.INFORMATION_MESSAGE);
-            
+            dispose();
         
         
         }

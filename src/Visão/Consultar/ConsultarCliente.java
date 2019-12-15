@@ -76,6 +76,11 @@ public class ConsultarCliente extends javax.swing.JFrame {
         });
 
         jButton3.setText("Todos");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -204,6 +209,30 @@ public class ConsultarCliente extends javax.swing.JFrame {
     
        
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        Connection con = Conexao.AbrirConexao();
+         ClienteDAO bd= new ClienteDAO (con);
+         List<Cliente> lista = new ArrayList<>();
+         lista = bd.Pesquisar_Tudo_Cliente();
+         DefaultTableModel tbm = (DefaultTableModel) jTable.getModel ();
+         while (tbm.getRowCount()>0) {
+             tbm.removeRow(0);
+              }
+         int i = 0;
+         for( Cliente tab : lista) {
+             tbm.addRow(new String[i]);
+             jTable.setValueAt(tab.getCodigo(), i,0);
+              jTable.setValueAt(tab.getNome(), i,1); 
+               jTable.setValueAt(tab.getCPF(), i,2);
+                jTable.setValueAt(tab.getRG(), i,3);
+                 jTable.setValueAt(tab.getTelefone(), i,4);
+                  jTable.setValueAt(tab.getEmail(), i,5);
+                  i++;
+                  
+                 }
+         Conexao.FecharConexao(con);
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments

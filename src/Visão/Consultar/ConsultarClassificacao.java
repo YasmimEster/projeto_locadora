@@ -70,6 +70,11 @@ public class ConsultarClassificacao extends javax.swing.JFrame {
         });
 
         jButton3.setText("Todos");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -171,6 +176,27 @@ public class ConsultarClassificacao extends javax.swing.JFrame {
                  }
          Conexao.FecharConexao(con);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        Connection con = Conexao.AbrirConexao();
+         ClassificacaoDAO bd= new ClassificacaoDAO (con);
+         List<Classificacao> lista = new ArrayList<>();
+         lista = bd.Pesquisar_Tudo_Classificacao();
+         DefaultTableModel tbm = (DefaultTableModel) jTable.getModel ();
+         while (tbm.getRowCount()>0) {
+             tbm.removeRow(0);
+              }
+         int i = 0;
+         for( Classificacao tab : lista) {
+             tbm.addRow(new String[i]);
+             jTable.setValueAt(tab.getCodigo(), i,0);
+              jTable.setValueAt(tab.getNome(), i,1);
+               jTable.setValueAt(tab.getPreco(), i,2); 
+              i++;
+                  
+                 }
+         Conexao.FecharConexao(con);
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments

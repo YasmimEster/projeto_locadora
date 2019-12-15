@@ -28,6 +28,31 @@ public class ClassificacaoDAO extends ExecuteSQL{
             return e.getMessage();
         }
     }
+    public List<Classificacao> ListarPrecoClassificacao(int codigo) {
+        
+        String sql = "select Preco from classificacao where idclassificacao = '" + codigo + "'";
+        List<Classificacao> listaCLA = new ArrayList<>();
+        try {
+            PreparedStatement ps = getCon().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            if (rs != null) {
+                while (rs.next()) {
+                    
+                    Classificacao a = new Classificacao();
+                    a.setPreco(rs.getInt(1));
+                    
+                    listaCLA.add(a);
+                }
+                return listaCLA;
+            } else {
+                return null;
+            }
+            
+        } catch (Exception e) {
+            return null;
+        }
+    }
      public List<Classificacao> ListarClassificacao(){
         String sql = "select idclassificacao,nome,preco from classificacao";
         List<Classificacao> lista = new ArrayList<>();
@@ -54,6 +79,30 @@ public class ClassificacaoDAO extends ExecuteSQL{
     }
      public List<Classificacao> Pesquisar_Nome_Classificacao(String nome){
         String sql = "select idclassificacao,nome,preco from classificacao where nome like '%" + nome + "%'";
+        List<Classificacao> lista = new ArrayList<>();
+        try{
+            PreparedStatement ps = getCon().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            if(rs != null) {
+                while (rs.next()){
+                    Classificacao a= new Classificacao();
+                    a.setCodigo(rs.getInt(1));
+                    a.setNome(rs.getString(2));
+                    a.setPreco(rs.getInt(3));
+
+                    lista.add(a);
+                  }
+                return lista;
+            }else{
+                return null;
+                
+            }
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+     public List<Classificacao> Pesquisar_Tudo_Classificacao(){
+        String sql = "select idclassificacao,nome,preco from classificacao where nome like '%" + "%'";
         List<Classificacao> lista = new ArrayList<>();
         try{
             PreparedStatement ps = getCon().prepareStatement(sql);

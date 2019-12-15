@@ -70,6 +70,11 @@ public class ConsultarFuncionario extends javax.swing.JFrame {
         });
 
         jButton3.setText("Todos");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -173,6 +178,28 @@ public class ConsultarFuncionario extends javax.swing.JFrame {
                  }
          Conexao.FecharConexao(con);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+Connection con = Conexao.AbrirConexao();
+         FuncionarioDAO bd= new FuncionarioDAO (con);
+         List<Funcionario> lista = new ArrayList<>();
+         lista = bd.Pesquisar_Tudo_Funcionario();
+         DefaultTableModel tbm = (DefaultTableModel) jTable.getModel ();
+         while (tbm.getRowCount()>0) {
+             tbm.removeRow(0);
+              }
+         int i = 0;
+         for( Funcionario tab : lista) {
+             tbm.addRow(new String[i]);
+             jTable.setValueAt(tab.getCod(), i,0);
+              jTable.setValueAt(tab.getNome(), i,1);
+               jTable.setValueAt(tab.getLogin(), i,2);
+                jTable.setValueAt(tab.getSenha(), i, 3);
+              i++;
+                  
+                 }
+         Conexao.FecharConexao(con);
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
