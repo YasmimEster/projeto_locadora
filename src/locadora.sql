@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 28-Nov-2019 às 19:36
+-- Tempo de geração: 16-Dez-2019 às 17:34
 -- Versão do servidor: 10.4.6-MariaDB
 -- versão do PHP: 7.3.8
 
@@ -48,6 +48,13 @@ CREATE TABLE `categoria` (
   `nome` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Extraindo dados da tabela `categoria`
+--
+
+INSERT INTO `categoria` (`idcategoria`, `nome`) VALUES
+(1, 'Geguel');
+
 -- --------------------------------------------------------
 
 --
@@ -59,6 +66,13 @@ CREATE TABLE `classificacao` (
   `nome` varchar(20) NOT NULL,
   `preco` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `classificacao`
+--
+
+INSERT INTO `classificacao` (`idclassificacao`, `nome`, `preco`) VALUES
+(2, 'Gordo', 12);
 
 -- --------------------------------------------------------
 
@@ -80,6 +94,14 @@ CREATE TABLE `cliente` (
   `cep` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Extraindo dados da tabela `cliente`
+--
+
+INSERT INTO `cliente` (`idcliente`, `nome`, `data_nasc`, `rg`, `cpf`, `email`, `telefone`, `bairro`, `rua`, `numero`, `cep`) VALUES
+(1, 'Um da Silva', '11/11/11', '1111111111.1', '111.111.111-11', 'umaum@numero.com', '(11)11111-1111', 'Numeral', 'Rua dos 1', 1, '12345-678'),
+(8, 'Luskinha', '00/00/0000', '1234567789.0', '123.456.789-00', 'Satanas@Luskinha.Diabo', '(66)60000-0000', 'Hogwarts', 'Alfineiros', 12, '57575-755');
+
 -- --------------------------------------------------------
 
 --
@@ -93,6 +115,13 @@ CREATE TABLE `dvd` (
   `data_compra` varchar(10) DEFAULT NULL,
   `situacao` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `dvd`
+--
+
+INSERT INTO `dvd` (`iddvd`, `idfilme`, `preco_compra`, `data_compra`, `situacao`) VALUES
+(6, 8, 20, '12/10/2019', 'Disponivel');
 
 -- --------------------------------------------------------
 
@@ -110,6 +139,14 @@ CREATE TABLE `filme` (
   `capa` varchar(80) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Extraindo dados da tabela `filme`
+--
+
+INSERT INTO `filme` (`idfilme`, `titulo`, `ano`, `duracao`, `idcategoria`, `idclassificacao`, `capa`) VALUES
+(8, 'Miranha', 2020, '11:11:00', 1, 2, 'WhatsApp Image 2019-12-01 at 19.21.43.jpeg'),
+(10, 'Duck_Tales', 2018, '02:20:10', 1, 2, 'WhatsApp Image 2019-12-01 at 19.21.47.jpeg');
+
 -- --------------------------------------------------------
 
 --
@@ -122,6 +159,13 @@ CREATE TABLE `funcionario` (
   `login` varchar(45) NOT NULL,
   `senha` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `funcionario`
+--
+
+INSERT INTO `funcionario` (`idfuncionario`, `nome`, `login`, `senha`) VALUES
+(1, 'administrador', 'admin', 'admin');
 
 --
 -- Índices para tabelas despejadas
@@ -182,43 +226,43 @@ ALTER TABLE `funcionario`
 -- AUTO_INCREMENT de tabela `aluguel`
 --
 ALTER TABLE `aluguel`
-  MODIFY `idaluguel` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idaluguel` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de tabela `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `idcategoria` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idcategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de tabela `classificacao`
 --
 ALTER TABLE `classificacao`
-  MODIFY `idclassificacao` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idclassificacao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de tabela `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `idcliente` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idcliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de tabela `dvd`
 --
 ALTER TABLE `dvd`
-  MODIFY `iddvd` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `iddvd` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de tabela `filme`
 --
 ALTER TABLE `filme`
-  MODIFY `idfilme` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idfilme` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de tabela `funcionario`
 --
 ALTER TABLE `funcionario`
-  MODIFY `idfuncionario` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idfuncionario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Restrições para despejos de tabelas

@@ -16,6 +16,7 @@ public class ConsultaDevolucao extends javax.swing.JFrame {
      */
     public ConsultaDevolucao() {
         initComponents();
+        setLocationRelativeTo(this);
     }
 
     /**

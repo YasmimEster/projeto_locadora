@@ -16,6 +16,7 @@ public class EfetuarDevolucao extends javax.swing.JFrame {
      */
     public EfetuarDevolucao() {
         initComponents();
+        setLocationRelativeTo(this);
     }
 
     /**

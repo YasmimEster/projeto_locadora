@@ -10,6 +10,7 @@ import Visão.Cadastrar.*;
 import Visão.Alterar.*;
 import Visão.Consultar.*;
 import Visão.Excluir.*;
+import locacao.ControleLocacao;
 
 /**
  *
@@ -122,9 +123,19 @@ public class Menu extends javax.swing.JFrame {
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/WhatsApp Image 2019-12-01 at 19.21.55 (2).jpeg"))); // NOI18N
         jButton1.setText("Devolução");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/WhatsApp Image 2019-12-01 at 19.21.55 (1).jpeg"))); // NOI18N
         jButton2.setText("Locação");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/WhatsApp Image 2019-12-01 at 19.22.18 (1).jpeg"))); // NOI18N
         jButton3.setText("Sair");
@@ -492,6 +503,14 @@ public class Menu extends javax.swing.JFrame {
         dispose();
         new Login().setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+     new ControleLocacao().setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
